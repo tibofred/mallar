@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MALLAR | Service Comptable - Services aux entreprises</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4535c1;
+            --primary-dark: #362a9a;
+            --primary-light: #6b5dd4;
+            --yellow: #f7c23b;
+            --red: #dc3545;
+            --white: #ffffff;
+            --black: #000000;
+            --gray: #747474;
+            --gray-light: #F6F6F6;
+            --text-nav: #222222;
+            --shadow-card: 0 0.5rem 1rem rgba(69, 69, 69, 0.15);
+            --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .headline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Background Effects */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            top: 10%;
+            right: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            bottom: 20%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            top: 50%;
+            left: 50%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            animation-delay: 10s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+            33% { transform: translate(60px, -80px) scale(1.1); opacity: 0.18; }
+            66% { transform: translate(-40px, 60px) scale(0.9); opacity: 0.15; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(69, 53, 193, 0.2);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(69, 53, 193, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(69, 53, 193, 0.5);
+            background: var(--primary-dark);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 40px 80px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 35px;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .hero h1 .accent {
+            color: var(--yellow);
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 16px 36px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-primary {
+            background: var(--red);
+            color: var(--white);
+            box-shadow: 0 6px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(220, 53, 69, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-alt {
+            background: var(--gray-light);
+        }
+
+        .section-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-primary .section-label {
+            color: var(--yellow);
+        }
+
+        .section-primary .section-label::before,
+        .section-primary .section-label::after {
+            background: var(--yellow);
+        }
+
+        .section-primary .section-title {
+            color: var(--white);
+        }
+
+        .section-primary .team-intro {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .section-primary .stat-number {
+            color: var(--yellow);
+        }
+
+        .section-primary .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 70px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--black);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Why Choose Us Cards */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reason-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s ease;
+            position: relative;
+            text-align: center;
+            border: 1px solid transparent;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
+            border-radius: 12px 12px 0 0;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .reason-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(69, 53, 193, 0.2);
+        }
+
+        .reason-number {
+            width: 50px;
+            height: 50px;
+            background: rgba(69, 53, 193, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .reason-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .reason-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s ease;
+            position: relative;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
+            border-radius: 16px 16px 0 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(69, 53, 193, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+        }
+
+        .service-icon svg {
+            stroke: var(--white);
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            text-align: left;
+            list-style: none;
+        }
+
+        .service-features li {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 10px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Team Section */
+        .team-section {
+            text-align: center;
+        }
+
+        .team-intro {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .team-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(69, 53, 193, 0.15);
+        }
+
+        .tool-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .tool-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .tool-card p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 70px;
+            font-family: 'Montserrat', sans-serif;
+            color: rgba(69, 53, 193, 0.1);
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(69, 53, 193, 0.15);
+        }
+
+        .testimonial-text {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .testimonial-company {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Process Section */
+        .process-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .process-step h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background: var(--white);
+            width: 100%;
+            max-width: 520px;
+            border-radius: 16px;
+            padding: 40px 36px 36px;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            animation: modalSlideIn 0.35s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Modal Close Button */
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--gray);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: var(--gray-light);
+            color: var(--black);
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .modal-header-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(69, 53, 193, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary);
+        }
+
+        .modal-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin: 0;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 28px;
+            padding-left: 58px;
+        }
+
+        /* Modal Form Fields */
+        .modal-overlay .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .modal-overlay .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .modal-overlay .form-group input,
+        .modal-overlay .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.2s ease;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .modal-overlay .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .modal-overlay .form-group input:focus,
+        .modal-overlay .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(69, 53, 193, 0.12);
+        }
+
+        .modal-overlay .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23747474' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Modal Actions */
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-actions .btn-cancel {
+            flex: 1;
+            padding: 13px 20px;
+            background: var(--gray-light);
+            color: var(--gray);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal-actions .btn-cancel:hover {
+            background: #eaeaea;
+            color: var(--black);
+        }
+
+        .modal-actions .btn-submit {
+            flex: 2;
+            padding: 13px 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal-actions .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(69, 53, 193, 0.35);
+        }
+
+        .modal-actions .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-note {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        /* Modal Success State */
+        .modal-success {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .modal-success .success-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(69, 53, 193, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .modal-success .success-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+        }
+
+        .modal-success h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .modal-success p {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-success .btn-close-success {
+            padding: 12px 36px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal-success .btn-close-success:hover {
+            background: var(--primary-dark);
+        }
+
+        /* CTA Section (replaces optin section) */
+        .cta-section {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta-section-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .cta-section > .cta-section-inner > p {
+            font-size: 18px;
+            color: var(--white);
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .cta-section .cta-primary {
+            font-size: 18px;
+            padding: 18px 44px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px 40px;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .reasons-grid,
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                padding: 15px 20px;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .section {
+                padding: 70px 20px;
+            }
+
+            .reasons-grid,
+            .services-grid,
+            .testimonials-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .process-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .process-step {
+                max-width: 100%;
+            }
+
+            .process-step::after {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-container {
+                padding: 30px 24px 28px;
+                max-width: 100%;
+            }
+
+            .modal-subtitle {
+                padding-left: 0;
+            }
+
+            .modal-actions {
+                flex-direction: column-reverse;
+            }
+
+            .modal-actions .btn-cancel,
+            .modal-actions .btn-submit {
+                flex: none;
+                width: 100%;
+            }
+
+            .team-stats {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .nav-cta {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-pattern">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="https://www.mallar.ca/home.html" class="logo">
+                <img src="https://storage.googleapis.com/msgsndr/IqriG9reEsEudQGDtQf0/media/69807cbf1f68d18bd80724ac.svg" alt="MALLAR Service Comptable">
+            </a>
+            <a href="#" onclick="openModal(); return false;" class="nav-cta">Planifier ma consultation</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">MALLAR | Service Comptable</div>
+
+            <h1>
+                Une comptabilité rigoureuse<br>
+                pour des décisions <span class="accent">éclairées</span>
+            </h1>
+
+            <p>
+                Confiez votre comptabilité à une équipe de professionnels qualifiés.
+                Gardez le contrôle de vos finances et concentrez-vous sur votre croissance.
+            </p>
+
+            <div class="cta-group">
+                <a href="#" onclick="openModal(); return false;" class="cta-primary">
+                    Planifier ma consultation
+                    <span>→</span>
+                </a>
+                <a href="#services" class="cta-secondary">
+                    Découvrir nos services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section section-alt">
+        <div class="section-header">
+            <div class="section-label">Pourquoi nous choisir</div>
+            <h2 class="section-title headline">4 raisons de confier votre comptabilité à MALLAR</h2>
+        </div>
+
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <div class="reason-number">1</div>
+                <h4>Expertise certifiée</h4>
+                <p>Une équipe de comptables et techniciens qualifiés avec des années d'expérience auprès des PME canadiennes.</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-number">2</div>
+                <h4>Technologies modernes</h4>
+                <p>Nous utilisons les meilleurs outils cloud pour une comptabilité efficace, sécurisée et accessible en temps réel.</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-number">3</div>
+                <h4>Service personnalisé</h4>
+                <p>Chaque entreprise est unique. Nous adaptons nos services à votre réalité et vos besoins spécifiques.</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-number">4</div>
+                <h4>Tarification transparente</h4>
+                <p>Des forfaits clairs et compétitifs, sans surprise. Vous savez exactement ce que vous payez.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="section-header">
+            <div class="section-label">Nos services</div>
+            <h2 class="section-title headline">Solutions comptables complètes</h2>
+            <p class="section-subtitle">
+                De la tenue de livres à la préparation fiscale, nous couvrons tous vos besoins comptables.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div>
+                <h3>Tenue de livres</h3>
+                <p>Enregistrement précis et rigoureux de toutes vos transactions financières.</p>
+                <ul class="service-features">
+                    <li>Saisie des factures</li>
+                    <li>Rapprochement bancaire</li>
+                    <li>Classification des dépenses</li>
+                    <li>Suivi des revenus</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>
+                <h3>Comptes payables</h3>
+                <p>Gestion efficace de vos obligations financières envers vos fournisseurs.</p>
+                <ul class="service-features">
+                    <li>Traitement des factures</li>
+                    <li>Planification des paiements</li>
+                    <li>Suivi des échéances</li>
+                    <li>Gestion des flux de trésorerie</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div>
+                <h3>Comptes recevables</h3>
+                <p>Maximisez vos encaissements et réduisez vos délais de paiement.</p>
+                <ul class="service-features">
+                    <li>Facturation client</li>
+                    <li>Suivi des paiements</li>
+                    <li>Relances automatisées</li>
+                    <li>Rapports de créances</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg></div>
+                <h3>États financiers</h3>
+                <p>Rapports financiers clairs pour prendre des décisions éclairées.</p>
+                <ul class="service-features">
+                    <li>Bilan mensuel</li>
+                    <li>État des résultats</li>
+                    <li>Flux de trésorerie</li>
+                    <li>Analyses de ratios</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div>
+                <h3>Taxes et remises</h3>
+                <p>Conformité gouvernementale et optimisation fiscale.</p>
+                <ul class="service-features">
+                    <li>TPS/TVQ</li>
+                    <li>Retenues à la source</li>
+                    <li>DAS et T4</li>
+                    <li>Déclarations fiscales</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+                <h3>Conseil financier</h3>
+                <p>Accompagnement stratégique pour optimiser vos finances.</p>
+                <ul class="service-features">
+                    <li>Analyse de rentabilité</li>
+                    <li>Budgétisation</li>
+                    <li>Planification fiscale</li>
+                    <li>Conseils de croissance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section section-primary team-section">
+        <div class="section-header">
+            <div class="section-label">Notre équipe</div>
+            <h2 class="section-title headline">Des professionnels à votre service</h2>
+        </div>
+
+        <p class="team-intro">
+            Notre équipe comptable est composée de professionnels qualifiés, passionnés par les chiffres et dédiés à la réussite de votre entreprise. Nous combinons expertise technique et approche humaine pour vous offrir un service d'exception.
+        </p>
+
+        <div class="team-stats">
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Clients satisfaits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Taux de satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24h</div>
+                <div class="stat-label">Délai de réponse</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">Nos outils</div>
+            <h2 class="section-title headline">Technologies de pointe</h2>
+            <p class="section-subtitle">
+                Nous utilisons les meilleurs logiciels comptables pour une gestion efficace et sécurisée.
+            </p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+                <h4>QuickBooks Online</h4>
+                <p>Comptabilité cloud accessible partout</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
+                <h4>Dext (Receipt Bank)</h4>
+                <p>Capture automatique des reçus</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+                <h4>Plooto</h4>
+                <p>Paiements électroniques sécurisés</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+                <h4>Fathom</h4>
+                <p>Analyses financières avancées</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section-alt">
+        <div class="section-header">
+            <div class="section-label">Comment ça fonctionne</div>
+            <h2 class="section-title headline">Un processus simple et efficace</h2>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="process-number">1</div>
+                <h4>Évaluation</h4>
+                <p>Analyse de vos besoins comptables</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">2</div>
+                <h4>Proposition</h4>
+                <p>Forfait personnalisé et tarification claire</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">3</div>
+                <h4>Intégration</h4>
+                <p>Migration et configuration des outils</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">4</div>
+                <h4>Gestion</h4>
+                <p>Prise en charge complète de votre comptabilité</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">Témoignages</div>
+            <h2 class="section-title headline">Ils nous font confiance</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Enfin une équipe comptable qui comprend les réalités d'une PME. Leurs rapports mensuels me donnent une vision claire de mes finances. Je recommande à 100%."</p>
+                <p class="testimonial-author">— Pierre D.</p>
+                <p class="testimonial-company">Entrepreneur, Construction</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"La transition vers MALLAR s'est faite en douceur. Leur équipe est réactive et toujours disponible pour répondre à mes questions. Un vrai partenaire financier."</p>
+                <p class="testimonial-author">— Catherine M.</p>
+                <p class="testimonial-company">Propriétaire, Commerce de détail</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Grâce à leurs conseils fiscaux, nous avons économisé des milliers de dollars cette année. Un investissement qui rapporte vraiment."</p>
+                <p class="testimonial-author">— Michel L.</p>
+                <p class="testimonial-company">Directeur, Agence de services</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Je dormais mal à cause de ma comptabilité en retard. Depuis que MALLAR s'en occupe, je peux enfin me concentrer sur mes clients."</p>
+                <p class="testimonial-author">— Anne-Marie T.</p>
+                <p class="testimonial-company">Consultante indépendante</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-section-inner">
+            <h2>Planifiez votre consultation gratuite</h2>
+            <p>Discutons de vos besoins comptables. Un spécialiste vous contactera sous 24h.</p>
+            <a href="#" onclick="openModal(); return false;" class="cta-primary">
+                Planifier ma consultation
+                <span>→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Modal Form -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                </div>
+                <h3>Parler à un représentant</h3>
+            </div>
+            <p class="modal-subtitle">Un spécialiste vous contactera sous 24h</p>
+
+            <form class="optin-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom_complet">Nom complet *</label>
+                        <input type="text" id="nom_complet" name="nom_complet" required placeholder="Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone *</label>
+                        <input type="tel" id="telephone" name="telephone" required placeholder="(514) 000-0000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Courriel *</label>
+                        <input type="email" id="email" name="email" required placeholder="votre@courriel.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="entreprise">Entreprise *</label>
+                        <input type="text" id="entreprise" name="entreprise" required placeholder="Nom de l'entreprise">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="raison">Quelle est votre situation? *</label>
+                    <select id="raison" name="raison" required>
+                        <option value="" disabled selected>Sélectionnez votre situation</option>
+                        <option value="Comptabilité en retard">Ma comptabilité est en retard</option>
+                        <option value="Externaliser tenue de livres">Je veux externaliser ma tenue de livres</option>
+                        <option value="Aide taxes fiscalité">J'ai besoin d'aide avec mes taxes et déclarations</option>
+                        <option value="Rapports financiers">Je veux des rapports financiers clairs</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-submit">Envoyer la demande</button>
+                </div>
+
+                <p class="form-note">Consultation gratuite et sans engagement.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <img src="https://storage.googleapis.com/msgsndr/IqriG9reEsEudQGDtQf0/media/69807cbf1fd827503ea655a6.svg" alt="MALLAR" class="footer-logo">
+        <p>Mallar Soutien aux entreprises</p>
+        <p>176 rue Principale, Saint-Sauveur (Québec) J0R 1R0</p>
+        <p>(418) 657-3232</p>
+        <p><a href="mailto:info@mallar.ca">info@mallar.ca</a></p>
+        <p style="margin-top: 30px; opacity: 0.5;">&copy; 2025 MALLAR. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on backdrop click
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                var target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var btn = this.querySelector('.btn-submit');
+            btn.disabled = true;
+            btn.textContent = 'Envoi en cours...';
+
+            var data = {
+                nom_complet: this.nom_complet.value,
+                telephone: this.telephone.value,
+                email: this.email.value,
+                entreprise: this.entreprise.value,
+                raison: this.raison.value,
+                service_recherche: 'Service Comptable'
+            };
+
+            fetch('https://services.leadconnectorhq.com/hooks/IqriG9reEsEudQGDtQf0/webhook-trigger/46fbab3e-025a-4895-8947-417bae3a3065', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(function() {});
+
+            // Show success state using safe DOM methods
+            var container = document.querySelector('#contactModal .modal-container');
+            var closeBtn = container.querySelector('.modal-close');
+            while (container.firstChild) container.removeChild(container.firstChild);
+            container.appendChild(closeBtn);
+
+            var success = document.createElement('div');
+            success.className = 'modal-success';
+
+            var iconWrap = document.createElement('div');
+            iconWrap.className = 'success-icon';
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '28');
+            svg.setAttribute('height', '28');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2.5');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M20 6 9 17l-5-5');
+            svg.appendChild(path);
+            iconWrap.appendChild(svg);
+            success.appendChild(iconWrap);
+
+            var h3 = document.createElement('h3');
+            h3.textContent = 'Merci!';
+            success.appendChild(h3);
+
+            var p = document.createElement('p');
+            p.textContent = 'Un membre de notre \u00e9quipe communiquera avec vous sous 24 heures.';
+            success.appendChild(p);
+
+            var closeSuccessBtn = document.createElement('button');
+            closeSuccessBtn.className = 'btn-close-success';
+            closeSuccessBtn.textContent = 'Fermer';
+            closeSuccessBtn.addEventListener('click', function() { closeModal(); });
+            success.appendChild(closeSuccessBtn);
+
+            container.appendChild(success);
+        });
+    </script>
+</body>
+</html>
